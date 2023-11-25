@@ -1,2 +1,51 @@
 @import './common';
 @import './example';
+
+body {
+background: #833ab4;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    margin: 100px;
+}
+
+form input {
+    background-color: transparent;
+    border: 1px solid;
+    border-radius: 25px;
+    padding: 8px;
+    outline: none;
+}
+
+::placeholder{
+    color: brown;
+}
+
+form button {
+    background-color: transparent;
+    border-radius: 25px;
+    padding: 8px 35px;
+    cursor: pointer;
+}
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.photo-card {
+    width: 250px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
