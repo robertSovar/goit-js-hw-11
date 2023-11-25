@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
      const images = await getImage(query);
      console.log(images);
      createImgCards(images);
+     formEl.reset();
     }
     
 
