@@ -5,8 +5,11 @@ const ENDPOINT = 'https://pixabay.com/api/';
 const API_KEY = '40885612-70f55eeefc8db6341de76fae5';
 
 
+Notiflix.Notify.init({ position: 'center-center' });
+
+
 // getting images from server
-export async function getImage(query) {
+export async function getImage(query, page) {
     try {
       const res = await axios.get(ENDPOINT, {
         params: {
@@ -15,7 +18,7 @@ export async function getImage(query) {
           image_type: 'photo',
           orientation: 'horizontal',
           safesearch: true,
-          page: 1,
+          page: page,
           per_page: 40,
         },
       });
