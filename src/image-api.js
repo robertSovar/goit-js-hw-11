@@ -33,7 +33,6 @@ export async function getImage(query, page) {
       return res.data.hits;
     } catch (error) {
       error = Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!');
-      
       throw error; 
     }
 };

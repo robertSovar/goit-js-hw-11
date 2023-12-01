@@ -9,6 +9,7 @@ galleryDiv.className = 'gallery';
 
 let currentPage = 1;
 let endOfPage = false;
+let lightbox;
 
 document.addEventListener('DOMContentLoaded', () => {
   formEl.addEventListener('submit', onSubmit);
@@ -66,6 +67,11 @@ async function onSubmit(e) {
 
 // Create images function
 async function createImgCards(images) {
+
+  if(!lightbox) {
+    createCarousel();
+  }
+
   const newImg = await Promise.all(images.map(image => {
     const imageCard = document.createElement('div');
     imageCard.innerHTML = `<div class="photo-card">
@@ -103,32 +109,34 @@ function createCarousel() {
   const lightbox = new SimpleLightbox('.gallery a', {});
 }
 
+
+// Load more images function 
 async function loadMoreImages(query) {
   try {
     endOfPage = true;
     const response = await getImage(query, currentPage);
-    
 
-    if (response.hits === 0) {
+    if (response.length === 0) {
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
       );
     } else {
       createImgCards(response);
       currentPage++;
-      // Calculează înălțimea unei cărți
       const { height: cardHeight } = document
         .querySelector('.gallery')
         .firstElementChild.getBoundingClientRect();
 
-      // Calculează cât de mult să facem scroll în jos (de exemplu, 2 cărți înălțime)
       const scrollAmount = cardHeight * 1;
 
-      // Face scroll fluid către partea de jos a galeriei
       window.scrollBy({
         top: scrollAmount,
         behavior: 'smooth',
       });
+      
+       if (lightbox) {
+        lightbox.refresh();
+      }
     }
   } catch (error) {
     console.error(error);
